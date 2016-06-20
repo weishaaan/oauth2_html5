@@ -10,25 +10,19 @@
 // template for new oauth2 service            
 function oauth2_login() {
     $.oauth2({
-        auth_url: '',           // required
-        response_type: '',      // required - "code"/"token"
-        token_url: '',          // required if response_type = 'code'
-        logout_url: '',         // recommended if available
-        client_id: '',          // required
-        client_secret: '',      // required if response_type = 'code'
-        redirect_uri: '',       // required - some dummy url
-        other_params: {}        // optional params object for scope, state, display...
-    }, function(token, response){
-        // do something with token or response
-        $("#logs").append("<p class='success'><b>access_token: </b>"+token+"</p>");
-        $("#logs").append("<p class='success'><b>response: </b>"+JSON.stringify(response)+"</p>");
-    }, function(error, response){
-        // do something with error object
-        $("#logs").append("<p class='error'><b>error: </b>"+JSON.stringify(error)+"</p>");
-        $("#logs").append("<p class='error'><b>response: </b>"+JSON.stringify(response)+"</p>");
-    }); 
+             auth_url: 'https://accounts.google.com/o/oauth2/auth',
+             response_type: 'token',
+             logout_url: 'https://accounts.google.com/logout',
+             client_id: '187356770002-vd2chjjahaeba35nockphhp85qjodps7.apps.googleusercontent.com',
+             redirect_uri: 'http://localhost:8383/AjaxWebPage/index.html',
+             other_params: {scope:'profile'}
+             }, function(token, response){
+             makeAPICalls(token);
+             }, function(error, response){
+             alert(error);
+             });
 }
-       
+    
         </script>
         <style>
             body{background-color:white;font-family: Arial;margin: 0}
